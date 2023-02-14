@@ -10,16 +10,16 @@ const postRoute = require('./routes/posts')
 
 dotenv.config()
 
-require('./dbConn')
+require('./dbConn') 
 
 //middlewares
 app.use(express.json())
 app.use(helmet())
 app.use(morgan("common"))
 
-app.use('/api/user', userRoute)
+app.use('/api/user', userRoute) 
 app.use('/api/auth', authRoute)
-app.use('/api/posts', postRoute )
+app.use('/api/posts', postRoute ) 
 
 
 

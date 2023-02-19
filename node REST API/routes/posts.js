@@ -73,11 +73,22 @@ router.get('/:id', async(req,res)=>{
     }
 })
 
-//get timeline posts means get posts of users you follow
-router.get('/timeline/all', async(req,res)=>{
+//get user's all post
+router.get('/profile/:username', async(req,res)=>{
     try {
-        const currentUser = await User.findById(req.body.userId)
-        const userPosts = await Post.find({userId: currentUser._id})            //fetching all the posts of current user
+        const user = await User.findOne({username: req.params.username})
+        const posts = await Post.find({userId: user._id}).sort({"createdAt": -1})
+        res.status(200).json(posts) 
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+//get timeline posts means get posts of users you follow
+router.get('/timeline/:userId', async(req,res)=>{
+    try {
+        const currentUser = await User.findById(req.params.userId)
+        const userPosts = await Post.find({userId: currentUser._id})            //fetching post of current user
 
         //note: whenever you use map or any other loop you should use promise.all otherwise it's not going to fetch everything if you write await inside loop.
         const friendPosts = await Promise.all(
@@ -87,8 +98,13 @@ router.get('/timeline/all', async(req,res)=>{
             })
         )
 
-        res.json(userPosts.concat(...friendPosts))
-
+        // console.log(friendPosts)
+        let test = userPosts.concat(...friendPosts)
+        test = test.sort((a,b)=> b.createdAt - a.createdAt)                 //sorting in descending order so that timeline can viewed from latest posts.
+        // console.log(test)
+        res.status(200).json(test)
+        // res.status(200).json(userPosts.concat(...friendPosts))
+        
     } catch (error) {
         res.status(500).json(error)
     }

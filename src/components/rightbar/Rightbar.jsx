@@ -2,8 +2,10 @@ import "./rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
 
-export default function Rightbar({ profile }) {
-  console.log(profile);
+export default function Rightbar({ user }) {
+  // console.log(user);
+  
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   //inner components
   const HomeRightbar = () => {
@@ -27,50 +29,52 @@ export default function Rightbar({ profile }) {
   };
 
   const ProfileRightbar = ()=>{
+    const {city, from, relationship} = user
     return (
       <>
         <h4 className="rightbarTitle">User Information</h4>
         <div className="rightbarInfo">
-          <div className="rightbarInfoItem">
+         {city && <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">City:</span>
-            <span className="rightbarInfoValue">New York</span>
-          </div>
-          <div className="rightbarInfoItem">
+            <span className="rightbarInfoValue">{city}</span>
+          </div>}
+          {from && <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">From:</span>
-            <span className="rightbarInfoValue">Faridabad</span>
-          </div>
-          <div className="rightbarInfoItem">
+            <span className="rightbarInfoValue">{from}</span>
+          </div>}
+          {relationship && <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">Single</span>
-          </div>
+            <span className="rightbarInfoValue">{relationship}</span>
+          </div>}
         </div>
         <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
-          <div className="rightbarFollowing">
-            <img src="assets/person/1.jpeg" alt="" className="rightbarFollowingImg" />
+          <div className="rightbarFollowing"> 
+            <img src={`${PF}person/1.jpeg`} alt="" className="rightbarFollowingImg" />
             <span className="rightbarFollowingName">Jeswin Mathew</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/2.jpeg" alt="" className="rightbarFollowingImg" />
+            <img src={`${PF}person/2.jpeg`} alt="" className="rightbarFollowingImg" />
             <span className="rightbarFollowingName">Jeswin Mathew</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/3.jpeg" alt="" className="rightbarFollowingImg" />
+            <img src={`${PF}person/3.jpeg`} alt="" className="rightbarFollowingImg" />
             <span className="rightbarFollowingName">Jeswin Mathew</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/4.jpeg" alt="" className="rightbarFollowingImg" />
+            <img src={`${PF}person/4.jpeg`} alt="" className="rightbarFollowingImg" />
             <span className="rightbarFollowingName">Jeswin Mathew</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/5.jpeg" alt="" className="rightbarFollowingImg" />
+            <img src={`${PF}person/5.jpeg`} alt="" className="rightbarFollowingImg" />
             <span className="rightbarFollowingName">Jeswin Mathew</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/8.jpeg" alt="" className="rightbarFollowingImg" />
+            <img src={`${PF}person/8.jpeg`} alt="" className="rightbarFollowingImg" />
             <span className="rightbarFollowingName">Jeswin Mathew</span>
           </div>
         </div>
+
       </>
     )
   }
@@ -80,7 +84,7 @@ export default function Rightbar({ profile }) {
       <div className="rightbarWrapper">
 
         {/* accessing the inner component */}
-        {profile ? <ProfileRightbar/> : <HomeRightbar/>}
+        {user ? <ProfileRightbar/> : <HomeRightbar/>}
         
       </div>
     </div>

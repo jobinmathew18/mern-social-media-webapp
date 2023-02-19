@@ -43,9 +43,11 @@ router.delete('/:id', async (req,res)=>{
 })
 
 //get a user
-router.get('/:id', async(req,res)=>{
+router.get('/', async(req,res)=>{                           //lh:8000/user?username=jobin
+    const userId = req.query.userId;
+    const username = req.query.username
     try {
-        const user = await User.findById(req.params.id)
+        const user = userId ? await User.findById(userId) : await User.findOne({username: username})
         // console.log(user._doc)                               //user._doc is basically our whole object
         const {password, updatedAt, ...other} = user._doc               
         res.status(200).json(other)                             //not GETTING password and updatedAt
@@ -76,7 +78,7 @@ router.put('/:id/unfollow', async(req,res)=>{
 })
 
 //follow a user
-router.put('/:id/follow', async(req,res)=>{
+router.put('/:id/follow', async(req,res)=>{ 
     if(req.body.userId !== req.params.id){
         try {
             const user = await User.findById(req.params.id)

@@ -45,12 +45,14 @@ export default function Login() {
               type="email"
               ref={email}
               className="loginInput"
+              // defaultValue="penny@gmail.com"
             />
             <input
               placeholder="Password"
               type="password"
               ref={password}
               className="loginInput"
+              // defaultValue="penny"
             />
             <button className="loginButton" type="submit" disabled={isFetching}>
               {isFetching ? <CircularProgress color="inherit" /> : "Log In"}

@@ -73,7 +73,7 @@ router.get('/:id', async(req,res)=>{
     }
 })
 
-//get user's all post
+//get all posts of a user
 router.get('/profile/:username', async(req,res)=>{
     try {
         const user = await User.findOne({username: req.params.username})
@@ -88,8 +88,9 @@ router.get('/profile/:username', async(req,res)=>{
 router.get('/timeline/:userId', async(req,res)=>{
     try {
         const currentUser = await User.findById(req.params.userId)
-        const userPosts = await Post.find({userId: currentUser._id})            //fetching post of current user
+        const userPosts = await Post.find({userId: currentUser._id})            //fetching posts of current user
 
+        //get posts of users you follow
         //note: whenever you use map or any other loop you should use promise.all otherwise it's not going to fetch everything if you write await inside loop.
         const friendPosts = await Promise.all(
             currentUser.following.map((friendId)=>{

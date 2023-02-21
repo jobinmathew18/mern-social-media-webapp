@@ -3,7 +3,7 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 
 
-//update a user
+//update a user info
 router.put('/:id', async (req,res)=>{
     if(req.body.userId === req.params.id || req.body.isAdmin){
         if(req.body.password){                  //if user tries to update password then generate a new secured password
@@ -99,5 +99,24 @@ router.put('/:id/follow', async(req,res)=>{
 })
 
 
+//get user's friends
+router.get('/friends/:userId', async (req,res)=>{
+    try {
+        const user = await User.findById(req.params.userId)
+        const friends = await Promise.all(
+            user.following.map((friendId)=>{
+                return User.findById(friendId)
+            })
+        )
+        let friendList = []
+        friends.map((friend)=>{
+            const {_id, username, profilePicture} = friend
+            friendList.push({_id, username, profilePicture});
+        })
+        res.status(200).json(friendList)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}) 
 
 module.exports = router

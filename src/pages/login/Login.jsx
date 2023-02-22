@@ -16,7 +16,7 @@ export default function Login() {
   const handleClick = (e) => {
     e.preventDefault();
     // console.log(email.current.value)
-    loginCall(
+    loginCall( 
       { email: email.current.value, password: password.current.value },
       dispatch
     );      //passing dispatch and other values to loginCall() ie in apiCalls.js

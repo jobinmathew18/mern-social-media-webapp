@@ -10,4 +10,4 @@ export const loginCall = async (userCredentials, dispatch)=>{
     } catch (error) {
         dispatch(LoginFailure(error))
     }
-}
+} 

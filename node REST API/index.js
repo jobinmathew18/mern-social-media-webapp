@@ -8,6 +8,8 @@ const cors = require('cors')
 const userRoute = require('./routes/users')
 const authRoute = require('./routes/auth')
 const postRoute = require('./routes/posts')
+const conversationRoute = require('./routes/conversations')
+const messageRoute = require('./routes/messages')
 const multer = require('multer')                    //multer is a nodejs middleware for handling and uploading files.
 const path = require('path')
 
@@ -44,6 +46,8 @@ const storage = multer.diskStorage({
 app.use('/api/user', userRoute)  
 app.use('/api/auth', authRoute)
 app.use('/api/posts', postRoute ) 
+app.use('/api/conversations', conversationRoute)
+app.use('/api/messages', messageRoute)
 
 
 

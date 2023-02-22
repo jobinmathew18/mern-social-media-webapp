@@ -15,7 +15,7 @@ const AuthReducer = (state, action) => {
             };
         case "LOGIN_FAILURE":
             return {
-                user: null,
+                user: null, 
                 isFetching: false,
                 error: action.payload
             };

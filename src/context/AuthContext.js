@@ -14,7 +14,7 @@ const INITIAL_STATE = {
     //         "63ea84b848d745e74cf25e54"
     //     ],
     //     "isAdmin": false,
-    //     "createdAt": "2023-02-14T07:24:45.282Z",
+    //     "createdAt": "2023-02-14T07:24:45.282Z", 
     //     "__v": 0
     // },
     user: JSON.parse(localStorage.getItem("user")) || null,

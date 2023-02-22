@@ -6,15 +6,15 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Topbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const { user } = useContext(AuthContext);               //this is our current user or logged in user
-  const navigate = useNavigate()
+  const { user } = useContext(AuthContext); //this is our current user or logged in user
+  const navigate = useNavigate();
   // console.log(user)
 
-  const handleLogout = ()=>{
-    localStorage.removeItem("user")
+  const handleLogout = () => {
+    localStorage.removeItem("user");
     window.location.reload();
-    navigate('/login')
-  }
+    navigate("/login");
+  };
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -23,7 +23,7 @@ export default function Topbar() {
         </Link>
       </div>
       <div className="topbarCenter">
-        <div className="searchbar"> 
+        <div className="searchbar">
           <Search className="searchIcon" />
           <input
             placeholder="Search for friends, posts or videos"
@@ -33,8 +33,12 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink" onClick={handleLogout}>Logout</span>
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <span className="topbarLink">Homepage</span>
+          </Link>
+          <span className="topbarLink" onClick={handleLogout}>
+            Logout
+          </span>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
@@ -42,8 +46,13 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
           <div className="topbarIconItem">
-            <Chat />
-            <span className="topbarIconBadge">2</span>
+            <Link
+              to="/messenger"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Chat />
+              <span className="topbarIconBadge">2</span>
+            </Link>
           </div>
           <div className="topbarIconItem">
             <Notifications />

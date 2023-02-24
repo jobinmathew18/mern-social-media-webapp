@@ -33,7 +33,7 @@ router.delete('/:id', async (req,res)=>{
     if(req.body.userId === req.params.id || req.body.isAdmin){
         try {
             const user = await User.findByIdAndDelete(req.body.userId);
-            res.status(200).json("Account has been deleted")
+            res.status(200).json("Account has been deleted") 
         } catch (error) {
             return res.status(500).json(error)
         }
@@ -52,7 +52,7 @@ router.get('/', async(req,res)=>{                           //lh:8000/user?usern
         const {password, updatedAt, ...other} = user._doc               
         res.status(200).json(other)                             //not GETTING password and updatedAt
     } catch (error) {
-        return res.status(500).json(error)
+        return res.status(500).json(error) 
     }
 })
 

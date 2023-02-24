@@ -1,2 +1,3 @@
-npm start
-nodemon index.js
+react start: npm start
+node backend: cd node REST API  nodemon index.js
+socket: cd socket nodemon index.js

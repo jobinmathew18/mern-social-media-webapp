@@ -10,20 +10,19 @@ export default function Login() {
   const navigate = useNavigate();
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, error, dispatch } = useContext(AuthContext);
-  // console.log(user, isFetching, error);
+  const { isFetching, error, dispatch } = useContext(AuthContext); 
 
   const handleClick = (e) => {
     e.preventDefault();
-    // console.log(email.current.value)
     loginCall( 
       { email: email.current.value, password: password.current.value },
       dispatch
     );      //passing dispatch and other values to loginCall() ie in apiCalls.js
+
   }
 
-  console.log(user, isFetching, error)
-
+  // console.log(user, isFetching, error)
+ 
   const handleRegister = (e)=>{
     e.preventDefault()
     navigate('/register')
@@ -54,6 +53,7 @@ export default function Login() {
               className="loginInput"
               // defaultValue="penny"
             />
+            {error && <span className="error" >Invalid credentials</span>}
             <button className="loginButton" type="submit" disabled={isFetching}>
               {isFetching ? <CircularProgress color="inherit" /> : "Log In"}
             </button>

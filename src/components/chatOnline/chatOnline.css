@@ -1,3 +1,7 @@
+.onlineFriends{
+    margin-block: 5px 10px;
+    color: rgb(138, 129, 129);
+}
 .chatOnlineFriend{
     display: flex;
     align-items: center;
@@ -29,3 +33,13 @@
     right: 0;
 }
 
+.offlineFriendName{
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.offlineFriends{
+    margin-block: 20px 10px;
+    color: rgb(138, 129, 129);
+}

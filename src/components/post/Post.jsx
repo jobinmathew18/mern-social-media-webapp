@@ -1,5 +1,10 @@
 import "./post.css";
-import { MoreVert } from "@mui/icons-material";
+import {
+  FavoriteBorder,
+  FavoriteOutlined,
+  MoreVert,
+  TextsmsOutlined,
+} from "@mui/icons-material";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
@@ -7,24 +12,24 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Post({ post }) {
-  // console.log(post)
+  // console.log(post._id)
   const [user, setUser] = useState({});
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const { user: currentUser } = useContext(AuthContext);      //setting {user: currentUser} because "user" already exists in this file.
+  const { user: currentUser } = useContext(AuthContext); //setting {user: currentUser} because "user" already exists in this file.
 
   useEffect(() => {
     // console.log("useEffect render: ", isLiked)              //for every post it will render and every post will have its isLiked() boolean value.
     setIsLiked(post.likes.includes(currentUser._id)); //if the post is already liked by the current user , then set setLiked to true. And we know is in
-    // console.log(post.likes) 
-  }, [currentUser._id, post.likes]);                   //likeHandler() the logic is setLike(isLiked ? like - 1 : like + 1);
+    // console.log(post.likes)
+  }, [currentUser._id, post.likes]); //likeHandler() the logic is setLike(isLiked ? like - 1 : like + 1);
 
   // console.log("after useEffect render: ", isLiked)
 
   useEffect(() => {
-    const fetchUsers = async () => { 
-      const res = await axios.get(`/user?userId=${post.userId}`);            
+    const fetchUsers = async () => {
+      const res = await axios.get(`/user?userId=${post.userId}`);
       // console.log(res)
       setUser(res.data);
     };
@@ -74,22 +79,16 @@ export default function Post({ post }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <img
-              className="likeIcon"
-              src={`${PF}like.png`}
-              onClick={likeHandler}
-              alt=""
-            /> 
-            <img
-              className="likeIcon"
-              src={`${PF}heart.png`}
-              onClick={likeHandler}
-              alt=""
-            />
-            <span className="postLikeCounter">{like} people like it</span>
+            {isLiked ? (
+              <FavoriteOutlined className="liked" onClick={likeHandler} />
+            ) : (
+              <FavoriteBorder onClick={likeHandler}/>
+            )}
+            <TextsmsOutlined />
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">{post.comment} comments</span>
+            <span className="postLikeCounter">{like} likes</span>
+            <span className="postCommentText">View all 14 comments</span>
           </div>
         </div>
       </div>

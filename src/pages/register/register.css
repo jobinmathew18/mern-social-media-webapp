@@ -82,3 +82,8 @@
     font-size: 20px;
     font-weight: 500;
 }
+
+.error{
+    color: red;
+    padding-block: 5px;
+}

@@ -32,6 +32,49 @@
     margin-bottom: 20px;
 }
 
+.userInformation{
+  padding: 20px 20px 10px;
+  margin-block: 30px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+
+.editInfo{
+  display: none;
+}
+
+.editInfo.active{
+  display: block;
+}
+
+.userInfoTopbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userInfoItem{
+  padding-top: 20px;
+}
+
+.itemName{
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.itemText{
+  margin-inline: 10px;
+  width: 50%;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: none;
+}
+
+.editIcon{
+  margin-right: 10px;
+  cursor: pointer;
+}
+
 .rightbarTitle{
   font-size: 18px;
   font-weight: 500;
@@ -40,6 +83,11 @@
 
 .rightbarInfo{
   margin-bottom: 30px;
+  display: inline;
+}
+
+.rightbarInfo.active{
+  display: none;
 }
 
 .rightbarInfoItem{
@@ -77,6 +125,7 @@
   font-size: 16px;
   font-weight: 500;
   color: #555;
+  text-transform: capitalize;
 }
 
 .rightbarFollowingImg{
@@ -87,7 +136,7 @@
 } 
 
 .rightbarFollowButton{
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 10px;
   border: none;
   background-color: #1872f2;
@@ -101,6 +150,27 @@
   cursor: pointer;
 }
 
+.rightbarFollowButton:hover{
+  background-color: #0b48a3;
+  transition: 0.4s;
+}
+
 .rightbarFollowButton:focus{
   outline: none;
 }
+
+.followsContainer{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 30px;
+  gap: 30px;
+}
+
+.folowsItem{
+  padding: 7px 10px;
+  background-color: #f0fafe;
+  border-radius: 9px;
+  font-weight: 500;
+  font-size: 17px;
+} 

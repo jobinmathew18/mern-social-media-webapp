@@ -8,13 +8,26 @@ import {
   Route,
   Navigate
 } from "react-router-dom"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Messenger from "./pages/messenger/Messenger";
+import axios from "axios";
+import { LoginSuccess } from "./context/AuthActions";
 
 function App() {
-  const {user} = useContext(AuthContext)
-  {user && console.log(user.username)}  
+  const {user, dispatch} = useContext(AuthContext)
+  // {user && console.log(user.username)}  
+
+  useEffect(()=>{
+    const currentUser = localStorage.getItem("userId")
+    const getCurrentUser = async ()=>{
+      console.log("app.js rendering")
+        const res = await axios(`/user?userId=${currentUser}`)
+        dispatch(LoginSuccess(res.data)) 
+    }
+    currentUser && getCurrentUser()
+}, [dispatch])
+
   return (
     <div>
       <Router>

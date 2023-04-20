@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './register.css'
+import { useState } from 'react'
 
 export default function Register() {
     const username = useRef()
@@ -9,6 +10,8 @@ export default function Register() {
     const password = useRef()
     const passwordAgain = useRef()
     const navigate = useNavigate();
+    const [errorMsg, setErrorMsg] = useState("")
+    const [error, seterror] = useState(false)
     
     const handleClick = async (e)=>{
         e.preventDefault();
@@ -26,6 +29,8 @@ export default function Register() {
                 navigate('/login')
             } catch (error) {
                 console.log(error)
+                setErrorMsg("User already exists.")
+                seterror(true)
             }
         }
     }
@@ -50,6 +55,7 @@ export default function Register() {
                     <input type='email' placeholder="Email" required className='loginInput'ref={email}/>
                     <input type='password' placeholder="Password" required className='loginInput' ref={password}/>
                     <input type="password" placeholder="Password again" required className='loginInput' ref={passwordAgain}/>
+                    {error && <span className='error'>{errorMsg}</span>}
                     <button className="registerButton" type='submit'>Sign Up</button>
                     <span className="registerForgot">Already a user?</span>
                      <button className="loginRegisterButton" onClick={handleLogin}>Log into account </button>

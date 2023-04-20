@@ -32,6 +32,7 @@
     font-size: 15px;
     font-weight: 500;
     margin: 0 10px;
+    text-transform: capitalize;
 }
 
 .postDate{
@@ -51,35 +52,39 @@
 
 .postBottom{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 16px;
 }
 
 .postBottomLeft{
     display: flex;
-    align-items: center;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: start;
 }
 
-.postBottom{
+.postBottomRight{
     display: flex;
-    align-items: center;
-}
-
-.likeIcon{
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
-    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .postLikeCounter{
     font-size: 15px;
-    margin-left: 5px;
+    margin-left: 2px;
+    font-weight: 500;
 }
 
 .postCommentText{
     cursor: pointer;
-    border-bottom: 1px dashed gray;
     font-size: 15px;
+    font-weight: 500;
 }
+
+.liked{
+    color: red;
+    cursor: pointer;
+}
+
 

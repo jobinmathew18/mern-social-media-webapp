@@ -14,12 +14,12 @@ export default function Feed({username}) {
     const fetchPosts = async ()=>{
       const res = username
       ? await axios.get('/posts/profile/' + username)
-      : await axios.get('posts/timeline/' + user._id) 
-      // console.log(res.data)
+      : await axios.get('/posts/timeline/' + user._id) 
       setPosts(res.data)
     }
     fetchPosts()
-  }, [username, user._id])            //whenever the username change , re render the useEffect().
+  }, [username, user._id,])            //whenever the username change , re render the useEffect().
+  
 
   return (
     <div className='feed'>

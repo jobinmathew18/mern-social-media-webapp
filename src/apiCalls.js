@@ -7,7 +7,10 @@ export const loginCall = async (userCredentials, dispatch)=>{
     try {
         const res = await axios.post('/auth/login', userCredentials);
         dispatch(LoginSuccess(res.data))     
+        const {_id} = res.data
+        localStorage.setItem("userId", _id)
     } catch (error) {
-        dispatch(LoginFailure(error))
+        dispatch(LoginFailure(true))
     }
 } 
+

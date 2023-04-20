@@ -7,14 +7,15 @@ import axios from "axios";
 export default function Share() {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const desc = useRef();
+  // const desc = useRef();
+  const [desc, setdesc] = useState(null)
   const [file, setFile] = useState(null);
 
   const submitHandler = async (e)=>{
     e.preventDefault()
     const newPost = {
         userId: user._id,
-        desc: desc.current.value
+        desc
     }
 
     console.log("before: " +file)
@@ -60,7 +61,7 @@ export default function Share() {
           <input
             placeholder={`What's in your mind ${user.username}?`} 
             className="shareInput"
-            ref={desc}
+            onChange={(e)=> setdesc(e.target.value)}
           />
         </div>
         <hr className="shareHr" />
@@ -74,7 +75,7 @@ export default function Share() {
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
               <PermMedia htmlColor="tomato" className="shareIcons" />
-              <span className="shareOptionText">Photo or Video</span>
+              <span className="shareOptionText">Photo or Video</span> 
               <input style={{display:"none"}}
                 type="file"
                 id="file"
@@ -96,7 +97,7 @@ export default function Share() {
             </div>
           </div>
           {/* whenever the below submit button is clicked then the onSubmit={submitHandler} will gets triggered.*/}
-          <button className="shareButton" type="submit">Share</button>          
+          {(desc || file) && <button className="shareButton" type="submit">Share</button>}          
         </form>
       </div>
     </div>

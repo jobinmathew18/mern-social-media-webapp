@@ -11,7 +11,7 @@ export default function Topbar() {
   // console.log(user)
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("userId");  
     window.location.reload();
     navigate("/login");
   };

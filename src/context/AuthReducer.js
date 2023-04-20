@@ -1,5 +1,5 @@
 const AuthReducer = (state, action) => {
-    // console.log("reducer: " + action.type, action.payload)
+    // console.log("reducer: " + action.type, action.payload) 
     switch (action.type) {
         case "LOGIN_START":
             return {
@@ -15,9 +15,13 @@ const AuthReducer = (state, action) => {
             };
         case "LOGIN_FAILURE":
             return {
-                user: null, 
+                user: null,
                 isFetching: false,
                 error: action.payload
+            };
+        case "CHANGE PICTURE":
+            return {
+                user: action.payload
             };
         default:
             return state;

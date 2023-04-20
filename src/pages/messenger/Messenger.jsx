@@ -16,6 +16,7 @@ export default function Messenger() {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [newMessage, setNewMessage] = useState("")
   const [onlineUsers, setOnlineUsers] = useState([])
+  const [onlineUsersCount, setonlineUsersCount] = useState(0)
   const scrollRef = useRef()
   const socket = useRef()
 
@@ -43,7 +44,8 @@ export default function Messenger() {
   useEffect(()=>{ 
     socket.current.emit('addUser', user._id)
     socket.current.on('getUsers', users=>{
-      // console.log(users)    
+      // console.log(users)   
+      setonlineUsersCount(users.length-1) 
       setOnlineUsers(users.map(ele=> ele.userId))       
     })      
   }, [user])  
@@ -111,9 +113,10 @@ export default function Messenger() {
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
+            <h3 className="chatTitle">Recent Chats</h3>
             <input
               type="text"
-              placeholder="Search for Friends" 
+              placeholder="Search chats" 
               className="chatMenuInput"
             />
             {conversations.map((ele) => (
@@ -133,6 +136,7 @@ export default function Messenger() {
             {currentChat ? (
               <>
                 <div className="chatBoxTop">
+                  <div className="chatTopBar"></div>
                   {messages.map((ele) => (
                     <div ref={scrollRef}>
                       <Message key={ele._id} message={ele} own={ele.sender === user._id}/>
@@ -159,6 +163,7 @@ export default function Messenger() {
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">
+            <h4 className="onlineFriends">Online({onlineUsersCount})</h4>
             <ChatOnline onlineUsers={onlineUsers} currentId={user._id} setCurrentChat={setCurrentChat}/>    {/*note: we are passing setCurrentChat as a prop and not currentChat. And we know setCurrentChat is a useState function */}
           </div>
         </div>

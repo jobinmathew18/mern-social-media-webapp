@@ -1,0 +1,25 @@
+.commentBox{
+    padding-block: 20px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 13px;
+}
+
+.commentImg{
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.commentUsername{
+    font-weight: 600;
+    margin-right: 3px;
+}
+
+.comment{
+    flex: 3;
+    font-weight: 400;
+}

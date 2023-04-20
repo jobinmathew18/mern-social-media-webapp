@@ -10,12 +10,14 @@ import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import Comments from "../comments/Comments";
 
 export default function Post({ post }) {
   // console.log(post._id)
   const [user, setUser] = useState({});
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
+  const [commentOpen, setCommentOpen] = useState(false)
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext); //setting {user: currentUser} because "user" already exists in this file.
 
@@ -50,7 +52,13 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
+  const handleComment = ()=>{
+    setCommentOpen(true)
+    document.body.style.overflow="hidden"
+  }
+
   return (
+    <>
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
@@ -82,16 +90,18 @@ export default function Post({ post }) {
             {isLiked ? (
               <FavoriteOutlined className="liked" onClick={likeHandler} />
             ) : (
-              <FavoriteBorder onClick={likeHandler}/>
+              <FavoriteBorder onClick={likeHandler} style={{cursor: 'pointer'}} />
             )}
-            <TextsmsOutlined />
+            <TextsmsOutlined style={{cursor: 'pointer'}} onClick={handleComment}/>
           </div>
           <div className="postBottomRight">
             <span className="postLikeCounter">{like} likes</span>
-            <span className="postCommentText">View all 14 comments</span>
+            <span className="postCommentText" onClick={handleComment}>View all comments</span>
           </div>
         </div>
       </div>
+    {commentOpen && <Comments currentPost={post._id} setCommentOpen={setCommentOpen}/> }
     </div>
+    </>
   );
 }
